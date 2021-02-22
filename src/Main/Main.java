@@ -18,6 +18,7 @@ public class Main {
         
         // xd xd xd  :v
         // TODO code application logic here
+        System.out.println("Hola mundo ");
     }
     
 }
