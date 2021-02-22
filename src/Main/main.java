@@ -4,8 +4,10 @@
  * and open the template in the editor.
  */
 package Main;
+
 import Clase.Reloj;
 import Clases.Proceso;
+import java.util.ArrayList;
 import javax.swing.JLabel;
 
 /**
@@ -16,16 +18,21 @@ public class main extends javax.swing.JFrame {
 
     private Reloj reloj;
     private int espacioMemoria;
+    private int contadorProceso;
+    private ArrayList<Proceso> listaProcesos;
+
     public main() {
         initComponents();
         setLocationRelativeTo(null);
-       
+
         reloj = new Reloj(labelReloj);
         reloj.hilo1.start();
-        System.out.println(panelMemoriaPrincipal.getWidth()+" "+panelMemoriaPrincipal.getHeight());
-        System.out.println(labelSO.getWidth()+" "+labelSO.getHeight());
+        System.out.println(panelMemoriaPrincipal.getWidth() + " " + panelMemoriaPrincipal.getHeight());
+        System.out.println(labelSO.getWidth() + " " + labelSO.getHeight());
         espacioMemoria = panelMemoriaPrincipal.getHeight() - labelSO.getHeight();
-        System.out.println(espacioMemoria); 
+        System.out.println(espacioMemoria);
+
+        listaProcesos = new ArrayList<Proceso>();
     }
 
     /**
@@ -230,11 +237,72 @@ public class main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+private int evaluarPosicion(int posicion){
+    boolean igual = false, buscar = true;
+    while(buscar){
+        System.out.println(posicion);
+        for(int i=0; i<listaProcesos.size(); i++){
+            if(posicion>=listaProcesos.get(i).getPosicionY()){//si la posicion es igual al de algun proceso
+                if(posicion<=listaProcesos.get(i).getPosicionFinal()){
+                    igual = true;
+                }
+            }
+        }
+        if(igual){
+            posicion = (int) Math.floor(Math.random() * 276 + 0);
+            igual = false;
+        }
+        else{
+            buscar = false;
+        }
+    }
+    
+    return posicion;
+}
+private int evaluarAltura(int posicion ,int altura ){
+    boolean igual = false, buscar = true;
+    
+        System.out.println(altura);
+        for(int i=0; i<listaProcesos.size(); i++){
+                                                                                         //Posicion proceso actual           Altura poceso actual
+            if((posicion)<listaProcesos.get(i).getPosicionY()){//si la posicion es igual al de algun proceso
+                if((posicion+altura)>listaProcesos.get(i).getPosicionY()){
+                    altura = listaProcesos.get(i).getPosicionY()-posicion;
+                } 
+            }
+        }
+      
+    return altura;
+}
     private void btnNuevoPorcesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPorcesoActionPerformed
-       Proceso proceso = new Proceso(1,0,0,50);
-       panelMemoriaPrincipal.add(proceso.getLabel());
-       panelMemoriaPrincipal.repaint();
+        int sizeProceso = (int) Math.floor(Math.random() * 189 + 20);
+        int posicionProceso = (int) Math.floor(Math.random() * 276 + 0);
+        
+        if (listaProcesos.size() == 0) {
+            contadorProceso = listaProcesos.size()+1;
+            Proceso proceso = new Proceso(contadorProceso, posicionProceso, sizeProceso);
+            panelMemoriaPrincipal.add(proceso.getLabel());
+            panelMemoriaPrincipal.repaint();
+            
+            listaProcesos.add(proceso);
+            System.out.println(posicionProceso+" "+sizeProceso);
+        } else {
+            posicionProceso = evaluarPosicion(posicionProceso);
+            sizeProceso = evaluarAltura(posicionProceso,sizeProceso);
+            if(sizeProceso>=20){
+            contadorProceso = listaProcesos.size()+1;
+            Proceso proceso = new Proceso(contadorProceso, posicionProceso, sizeProceso);
+            panelMemoriaPrincipal.add(proceso.getLabel());
+            panelMemoriaPrincipal.repaint();
+            listaProcesos.add(proceso);
+            
+            }
+            else{
+                System.out.println("la altura no es mayor a 20");
+            }
+            
+        }
+
     }//GEN-LAST:event_btnNuevoPorcesoActionPerformed
 
     /**

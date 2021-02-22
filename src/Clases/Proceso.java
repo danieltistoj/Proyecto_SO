@@ -17,14 +17,26 @@ import javax.swing.SwingConstants;
  */
 public class Proceso {
   private JLabel label;
-  private int ancho;
-  public Proceso(int numProceso,int posicionX, int posicionY,int altura){
+  private int ancho ,altura,posicionY,posicionFinal;
+  public Proceso(int numProceso ,int posicionY,int altura){
    ancho = 186;
    label = new JLabel("Proceso "+numProceso, SwingConstants.CENTER);
-   label.setBounds(posicionX, posicionY, ancho,altura);
+   label.setBounds(0, posicionY, ancho,altura);
    label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+   this.altura = altura;
+   this.posicionY = posicionY;
+   this.posicionFinal = altura+posicionY;
   }
   public JLabel getLabel(){
       return label;
+  }
+  public int getAltura(){
+      return this.altura;
+  }
+  public int getPosicionY(){
+      return this.posicionY;
+  }
+  public int getPosicionFinal(){
+      return this.posicionFinal;
   }
 }
