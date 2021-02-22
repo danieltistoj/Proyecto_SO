@@ -9,6 +9,7 @@ import Clase.Reloj;
 import Clases.Proceso;
 import java.util.ArrayList;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -18,7 +19,7 @@ public class main extends javax.swing.JFrame {
 
     private Reloj reloj;
     private int espacioMemoria;
-    private int contadorProceso;
+    private int contadorProceso, sizeMemoria;
     private ArrayList<Proceso> listaProcesos;
 
     public main() {
@@ -33,6 +34,7 @@ public class main extends javax.swing.JFrame {
         System.out.println(espacioMemoria);
 
         listaProcesos = new ArrayList<Proceso>();
+        sizeMemoria = 447;
     }
 
     /**
@@ -60,6 +62,9 @@ public class main extends javax.swing.JFrame {
         labelSO = new javax.swing.JLabel();
         btnNuevoPorceso = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        labelSizeMemoria = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -194,6 +199,21 @@ public class main extends javax.swing.JFrame {
 
         jLabel3.setText("Memoria Principal");
 
+        labelSizeMemoria.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        labelSizeMemoria.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labelSizeMemoria.setText("447");
+
+        jLabel7.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jLabel7.setText("Tamaño en memoria");
+
+        jButton1.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
+        jButton1.setText("Limpiar Memoria");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -202,13 +222,21 @@ public class main extends javax.swing.JFrame {
                 .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(panelMemoriaPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
-                        .addComponent(btnNuevoPorceso, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(57, 57, 57))
-                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(panelMemoriaPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(70, 70, 70)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(labelSizeMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(121, 121, 121))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel7)
+                                    .addComponent(btnNuevoPorceso, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(57, 57, 57)))))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(panelProcesador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -229,6 +257,12 @@ public class main extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(8, 8, 8)
                                 .addComponent(btnNuevoPorceso, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(53, 53, 53)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(labelSizeMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(83, 83, 83)
+                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(panelMemoriaPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -271,12 +305,32 @@ private int evaluarAltura(int posicion ,int altura ){
                 } 
             }
         }
-      
+      if((posicion+altura)>447){
+          altura = 447-posicion;
+      }
     return altura;
 }
+private void limpiarMemoria(){
+    for(int i=0; i<listaProcesos.size();i++){
+        panelMemoriaPrincipal.remove(listaProcesos.get(i).getLabel());
+    }
+    panelMemoriaPrincipal.repaint();
+    listaProcesos.clear();
+    sizeMemoria = 447;
+    labelSizeMemoria.setText(sizeMemoria+"");
+}
+private int buscarAlternativa(){
+    int mayor = listaProcesos.get(0).getPosicionFinal();
+    for(int i=0;i<listaProcesos.size();i++){
+        if(listaProcesos.get(i).getPosicionFinal()>mayor){
+            mayor = listaProcesos.get(i).getPosicionFinal();
+        }
+    }
+    return mayor;
+}
     private void btnNuevoPorcesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPorcesoActionPerformed
-        int sizeProceso = (int) Math.floor(Math.random() * 189 + 20);
-        int posicionProceso = (int) Math.floor(Math.random() * 276 + 0);
+        int sizeProceso = (int) Math.floor(Math.random() * 189 + 10);
+        int posicionProceso = (int) Math.floor(Math.random() *426 + 0);
         
         if (listaProcesos.size() == 0) {
             contadorProceso = listaProcesos.size()+1;
@@ -285,25 +339,32 @@ private int evaluarAltura(int posicion ,int altura ){
             panelMemoriaPrincipal.repaint();
             
             listaProcesos.add(proceso);
-            System.out.println(posicionProceso+" "+sizeProceso);
+            sizeMemoria = sizeMemoria-sizeProceso;
+            labelSizeMemoria.setText(sizeMemoria+"");
         } else {
             posicionProceso = evaluarPosicion(posicionProceso);
             sizeProceso = evaluarAltura(posicionProceso,sizeProceso);
-            if(sizeProceso>=20){
+            if(sizeProceso>=10){
             contadorProceso = listaProcesos.size()+1;
             Proceso proceso = new Proceso(contadorProceso, posicionProceso, sizeProceso);
             panelMemoriaPrincipal.add(proceso.getLabel());
             panelMemoriaPrincipal.repaint();
             listaProcesos.add(proceso);
             
+            sizeMemoria = sizeMemoria-sizeProceso;
+            labelSizeMemoria.setText(sizeMemoria+"");
             }
             else{
-                System.out.println("la altura no es mayor a 20");
+                JOptionPane.showMessageDialog(null,"No hay espacio para el nuevo proceso");
+                System.out.println("Mayor alternativa"+buscarAlternativa());
             }
-            
         }
 
     }//GEN-LAST:event_btnNuevoPorcesoActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        limpiarMemoria();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -342,11 +403,13 @@ private int evaluarAltura(int posicion ,int altura ){
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnNuevoPorceso;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labelBase;
@@ -354,6 +417,7 @@ private int evaluarAltura(int posicion ,int altura ){
     private javax.swing.JLabel labelLimite;
     private javax.swing.JLabel labelReloj;
     private javax.swing.JLabel labelSO;
+    private javax.swing.JLabel labelSizeMemoria;
     private javax.swing.JPanel panelMemoriaPrincipal;
     private javax.swing.JPanel panelProcesador;
     private javax.swing.JTextArea textArea;
