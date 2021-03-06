@@ -296,6 +296,7 @@ private void limpiarMemoria(){
             listaProcesos.add(proceso); //agrega el proceso a la lista 
             sizeMemoria = sizeMemoria-sizeProceso; // se le resta espacio a la memoria 
             labelSizeMemoria.setText(sizeMemoria+"");
+            textArea.setText(listaProcesos.get(0).getLabel().getText() + " creado a las "+labelReloj.getText());
         } 
         else{
            posicionInicial = listaProcesos.get(listaProcesos.size()-1).getPosicionFinal(); // se optiene la posicion del nuevo proceso 
@@ -313,6 +314,7 @@ private void limpiarMemoria(){
            listaProcesos.add(proceso);
            sizeMemoria = sizeMemoria-sizeProceso;
            labelSizeMemoria.setText(sizeMemoria+""); 
+           textArea.setText(textArea.getText()+"\n"+listaProcesos.get(listaProcesos.size()-1).getLabel().getText() + " creado a las "+labelReloj.getText());
            }
               
            
