@@ -286,20 +286,21 @@ private void limpiarMemoria(){
     private void btnNuevoPorcesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPorcesoActionPerformed
         int sizeProceso = (int) Math.floor(Math.random() * 189 + 10);
         int posicionInicial;
-        if(sizeMemoria!=0){
-            if (listaProcesos.size() == 0) {
-            contadorProceso = listaProcesos.size()+1;
-            Proceso proceso = new Proceso(contadorProceso,0, sizeProceso);
-            panelMemoriaPrincipal.add(proceso.getLabel());
-            panelMemoriaPrincipal.repaint();
+        if(sizeMemoria!=0){ // si aun hay espacio en memoria
+            if (listaProcesos.size() == 0) { //Si la lista esta vacia 
+            contadorProceso = listaProcesos.size()+1; //Incrementa uno en el contador, que va a indicar el numero del proceso
+            Proceso proceso = new Proceso(contadorProceso,0, sizeProceso); //crea un nuevo proceso
+            panelMemoriaPrincipal.add(proceso.getLabel());//agrega el proceso al panel
+            panelMemoriaPrincipal.repaint();// actualiza el panel
             
-            listaProcesos.add(proceso);
-            sizeMemoria = sizeMemoria-sizeProceso;
+            listaProcesos.add(proceso); //agrega el proceso a la lista 
+            sizeMemoria = sizeMemoria-sizeProceso; // se le resta espacio a la memoria 
             labelSizeMemoria.setText(sizeMemoria+"");
         } 
         else{
-           posicionInicial = listaProcesos.get(listaProcesos.size()-1).getPosicionFinal(); 
-           if(posicionInicial+sizeProceso>447){
+           posicionInicial = listaProcesos.get(listaProcesos.size()-1).getPosicionFinal(); // se optiene la posicion del nuevo proceso 
+           
+           if(posicionInicial+sizeProceso>447){//si el proceso acupa el espacio del sistema operativo
                JOptionPane.showMessageDialog(null,"No hay espacio para el nuevo proceso","Erro",JOptionPane.ERROR_MESSAGE);
            }
            else{
