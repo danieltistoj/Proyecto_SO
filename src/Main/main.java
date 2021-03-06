@@ -271,45 +271,7 @@ public class main extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-private int evaluarPosicion(int posicion){
-    boolean igual = false, buscar = true;
-    while(buscar){
-        System.out.println(posicion);
-        for(int i=0; i<listaProcesos.size(); i++){
-            if(posicion>=listaProcesos.get(i).getPosicionY()){//si la posicion es igual al de algun proceso
-                if(posicion<=listaProcesos.get(i).getPosicionFinal()){
-                    igual = true;
-                }
-            }
-        }
-        if(igual){
-            posicion = (int) Math.floor(Math.random() * 276 + 0);
-            igual = false;
-        }
-        else{
-            buscar = false;
-        }
-    }
-    
-    return posicion;
-}
-private int evaluarAltura(int posicion ,int altura ){
-    boolean igual = false, buscar = true;
-    
-        System.out.println(altura);
-        for(int i=0; i<listaProcesos.size(); i++){
-                                                                                         //Posicion proceso actual           Altura poceso actual
-            if((posicion)<listaProcesos.get(i).getPosicionY()){//si la posicion es igual al de algun proceso
-                if((posicion+altura)>listaProcesos.get(i).getPosicionY()){
-                    altura = listaProcesos.get(i).getPosicionY()-posicion;
-                } 
-            }
-        }
-      if((posicion+altura)>447){
-          altura = 447-posicion;
-      }
-    return altura;
-}
+
 private void limpiarMemoria(){
     for(int i=0; i<listaProcesos.size();i++){
         panelMemoriaPrincipal.remove(listaProcesos.get(i).getLabel());
@@ -319,46 +281,48 @@ private void limpiarMemoria(){
     sizeMemoria = 447;
     labelSizeMemoria.setText(sizeMemoria+"");
 }
-private int buscarAlternativa(){
-    int mayor = listaProcesos.get(0).getPosicionFinal();
-    for(int i=0;i<listaProcesos.size();i++){
-        if(listaProcesos.get(i).getPosicionFinal()>mayor){
-            mayor = listaProcesos.get(i).getPosicionFinal();
-        }
-    }
-    return mayor;
-}
+
+
     private void btnNuevoPorcesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPorcesoActionPerformed
         int sizeProceso = (int) Math.floor(Math.random() * 189 + 10);
-        int posicionProceso = (int) Math.floor(Math.random() *426 + 0);
-        
-        if (listaProcesos.size() == 0) {
+        int posicionInicial;
+        if(sizeMemoria!=0){
+            if (listaProcesos.size() == 0) {
             contadorProceso = listaProcesos.size()+1;
-            Proceso proceso = new Proceso(contadorProceso, posicionProceso, sizeProceso);
+            Proceso proceso = new Proceso(contadorProceso,0, sizeProceso);
             panelMemoriaPrincipal.add(proceso.getLabel());
             panelMemoriaPrincipal.repaint();
             
             listaProcesos.add(proceso);
             sizeMemoria = sizeMemoria-sizeProceso;
             labelSizeMemoria.setText(sizeMemoria+"");
-        } else {
-            posicionProceso = evaluarPosicion(posicionProceso);
-            sizeProceso = evaluarAltura(posicionProceso,sizeProceso);
-            if(sizeProceso>=10){
-            contadorProceso = listaProcesos.size()+1;
-            Proceso proceso = new Proceso(contadorProceso, posicionProceso, sizeProceso);
-            panelMemoriaPrincipal.add(proceso.getLabel());
-            panelMemoriaPrincipal.repaint();
-            listaProcesos.add(proceso);
+        } 
+        else{
+           posicionInicial = listaProcesos.get(listaProcesos.size()-1).getPosicionFinal(); 
+           if(posicionInicial+sizeProceso>447){
+               JOptionPane.showMessageDialog(null,"No hay espacio para el nuevo proceso","Erro",JOptionPane.ERROR_MESSAGE);
+           }
+           else{
+           contadorProceso = listaProcesos.size()+1;  
+           posicionInicial = listaProcesos.get(listaProcesos.size()-1).getPosicionFinal();
+           Proceso proceso = new Proceso(contadorProceso,posicionInicial, sizeProceso);
+           panelMemoriaPrincipal.add(proceso.getLabel());
+           panelMemoriaPrincipal.repaint();
+           
+           listaProcesos.add(proceso);
+           sizeMemoria = sizeMemoria-sizeProceso;
+           labelSizeMemoria.setText(sizeMemoria+""); 
+           }
+              
+           
             
-            sizeMemoria = sizeMemoria-sizeProceso;
-            labelSizeMemoria.setText(sizeMemoria+"");
-            }
-            else{
-                JOptionPane.showMessageDialog(null,"No hay espacio para el nuevo proceso");
-                System.out.println("Mayor alternativa"+buscarAlternativa());
-            }
         }
+        }
+        else{
+            JOptionPane.showConfirmDialog(null,"ya no hay espacio en memoria","Error",JOptionPane.ERROR_MESSAGE);
+        }
+        
+        
 
     }//GEN-LAST:event_btnNuevoPorcesoActionPerformed
 
