@@ -6,6 +6,7 @@
 package Clases;
 
 import java.awt.Color;
+import java.awt.Font;
 import javax.swing.BorderFactory;
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
@@ -25,20 +26,23 @@ public class Proceso {
         label = new JLabel("Proceso " + numProceso, SwingConstants.CENTER);
         label.setBounds(0, posicionY, ancho, altura);
         label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+        label.setFont( new Font("Serif", Font.BOLD, 18));
+        verde();
         this.altura = altura;
         this.posicionY = posicionY;
         this.posicionFinal = altura + posicionY;
         this.tiempoEjecucion = time;
-        
     }
     public void azul()
     {
+        label.setForeground(Color.WHITE);
         label.setBackground(Color.BLUE);
         System.out.println("COLOR AZUL");
         label.setOpaque(true);
     }
     public void verde()
     {
+        label.setForeground(Color.BLACK);
         label.setBackground(Color.GREEN);
         System.out.println("COLOR VERDE");
         label.setOpaque(true);

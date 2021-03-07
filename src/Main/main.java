@@ -30,14 +30,12 @@ public class main extends javax.swing.JFrame {
     public main() {
         initComponents();
         setLocationRelativeTo(null);
-
         reloj = new Reloj(labelReloj);
         reloj.hilo1.start();
         System.out.println(panelMemoriaPrincipal.getWidth() + " " + panelMemoriaPrincipal.getHeight());
         System.out.println(labelSO.getWidth() + " " + labelSO.getHeight());
         espacioMemoria = panelMemoriaPrincipal.getHeight() - labelSO.getHeight();
         System.out.println(espacioMemoria);
-
         listaProcesos = new ArrayList<Proceso>();
         sizeMemoria = 447;
     }
@@ -71,6 +69,7 @@ public class main extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        panelHXD = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -227,6 +226,17 @@ public class main extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout panelHXDLayout = new javax.swing.GroupLayout(panelHXD);
+        panelHXD.setLayout(panelHXDLayout);
+        panelHXDLayout.setHorizontalGroup(
+            panelHXDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 35, Short.MAX_VALUE)
+        );
+        panelHXDLayout.setVerticalGroup(
+            panelHXDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -236,9 +246,11 @@ public class main extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(panelMemoriaPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelHXD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(60, 60, 60)
+                                .addGap(19, 19, 19)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -289,9 +301,11 @@ public class main extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(23, 23, 23))
-                    .addGroup(layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(8, 8, 8)
-                        .addComponent(panelMemoriaPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(panelHXD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelMemoriaPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE))
                         .addContainerGap())))
         );
 
@@ -304,7 +318,7 @@ public class main extends javax.swing.JFrame {
         }
         panelMemoriaPrincipal.repaint();
         listaProcesos.clear();
-        sizeMemoria = 447;
+        sizeMemoria = 427;
         labelSizeMemoria.setText(sizeMemoria + "");
     }
 
@@ -323,6 +337,9 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        for (int i = 0; i < listaProcesos.size(); i++) {
+            System.out.println(listaProcesos.get(i).getLabel().getText());
+        }
         if (r.isAlive() == false) {
             r = new Hilo();
             r.start();
@@ -383,12 +400,14 @@ public class main extends javax.swing.JFrame {
                         procestoeje = listaProcesos.get(i).getTiempoEjecucion();
                         listaProcesos.get(i).azul();
                         repaint();
+                        System.out.println("ENTRO A " + listaProcesos.get(i).getLabel().getText());
                         if (listaProcesos.get(i).getTiempoEjecucion() <= cuantum) {
                             for (int l = 0; l <= listaProcesos.get(i).getTiempoEjecucion(); l++) {
                                 Thread.sleep(1000);
                                 System.out.println("menos a cuantum" + procestoeje);
                                 labelCalendarizador.setText(listaProcesos.get(i).getLabel().getText());
                             }
+                            System.out.println("TRABAJANDO " + listaProcesos.get(i).getLabel().getText());
                             panelMemoriaPrincipal.remove(listaProcesos.get(i).getLabel());
                             panelMemoriaPrincipal.repaint();
                             //Mostrar en el historial que sale el proceso de la memoria principal
@@ -399,8 +418,10 @@ public class main extends javax.swing.JFrame {
                             labelSizeMemoria.setText(sizeMemoria + "");
                             //se retira el proceso de la lista 
                             listaProcesos.remove(i);
+                            i--;
                             System.out.println("remove");
                         } else if (listaProcesos.get(i).getTiempoEjecucion() > cuantum) {
+                            System.out.println("TRABAJANDO " + listaProcesos.get(i).getLabel().getText());
                             contador = 0;
                             for (int j = 0; j < cuantum; j++) {
                                 contador++;
@@ -419,7 +440,7 @@ public class main extends javax.swing.JFrame {
         }
     }
     public class HiloAgregar extends Thread {
-
+        
         private int cuantum = 10;
         private int contador = 0;
         private int procestoeje = 0;
@@ -443,7 +464,7 @@ public class main extends javax.swing.JFrame {
                 } else {
                     posicionInicial = listaProcesos.get(listaProcesos.size() - 1).getPosicionFinal(); // se optiene la posicion del nuevo proceso 
 
-                    if (posicionInicial + sizeProceso > 447) {//si el proceso acupa el espacio del sistema operativo
+                    if (posicionInicial + sizeProceso > 427) {//si el proceso acupa el espacio del sistema operativo
                         JOptionPane.showMessageDialog(null, "No hay espacio para el nuevo proceso", "Erro", JOptionPane.ERROR_MESSAGE);
                     } else {
                         contadorProceso = listaProcesos.size() + 1;
@@ -484,6 +505,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel labelReloj;
     private javax.swing.JLabel labelSO;
     private javax.swing.JLabel labelSizeMemoria;
+    private javax.swing.JPanel panelHXD;
     private javax.swing.JPanel panelMemoriaPrincipal;
     private javax.swing.JPanel panelProcesador;
     private javax.swing.JTextArea textArea;
