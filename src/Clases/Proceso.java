@@ -31,7 +31,18 @@ public class Proceso {
         this.tiempoEjecucion = time;
         
     }
-
+    public void azul()
+    {
+        label.setBackground(Color.BLUE);
+        System.out.println("COLOR AZUL");
+        label.setOpaque(true);
+    }
+    public void verde()
+    {
+        label.setBackground(Color.GREEN);
+        System.out.println("COLOR VERDE");
+        label.setOpaque(true);
+    }
     public JLabel getLabel() {
         return label;
     }

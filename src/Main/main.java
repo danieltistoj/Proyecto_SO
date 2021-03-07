@@ -7,6 +7,7 @@ package Main;
 
 import Clase.Reloj;
 import Clases.Proceso;
+import java.awt.Color;
 import java.lang.System.Logger;
 import java.lang.System.Logger.Level;
 import java.util.ArrayList;
@@ -23,7 +24,8 @@ public class main extends javax.swing.JFrame {
     private int espacioMemoria;
     private int contadorProceso, sizeMemoria;
     private ArrayList<Proceso> listaProcesos;
-    private Hilo r=new Hilo();
+    private Hilo r = new Hilo();
+    private HiloAgregar a = new HiloAgregar();
 
     public main() {
         initComponents();
@@ -157,7 +159,7 @@ public class main extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labelCalendarizador, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 42, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(panelProcesadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labelBase, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
@@ -218,7 +220,7 @@ public class main extends javax.swing.JFrame {
         });
 
         jButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton2.setText("Inicio");
+        jButton2.setText("Ejecutar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
@@ -230,16 +232,13 @@ public class main extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(16, 16, 16)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
+                        .addGap(26, 26, 26)
                         .addComponent(panelMemoriaPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(70, 70, 70)
+                                .addGap(60, 60, 60)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -251,10 +250,14 @@ public class main extends javax.swing.JFrame {
                                         .addGap(0, 0, Short.MAX_VALUE)
                                         .addComponent(labelSizeMemoria, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(121, 121, 121))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                            .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2)
-                                .addGap(109, 109, 109)))))
+                                .addGap(109, 109, 109))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(61, 61, 61)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(panelProcesador, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -263,10 +266,10 @@ public class main extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(14, 14, 14)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -284,9 +287,12 @@ public class main extends javax.swing.JFrame {
                                 .addGap(34, 34, 34)
                                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(panelMemoriaPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(23, 23, 23))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(23, 23, 23))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
+                        .addComponent(panelMemoriaPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())))
         );
 
         pack();
@@ -304,44 +310,12 @@ public class main extends javax.swing.JFrame {
 
 
     private void btnNuevoPorcesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoPorcesoActionPerformed
-        int sizeProceso = (int) Math.floor(Math.random() * 189 + 10);
-        int tiempoeje = (int) Math.floor(Math.random() * 14 + 0);
-        int posicionInicial;
-        if (sizeMemoria != 0) { // si aun hay espacio en memoria
-            if (listaProcesos.size() == 0) { //Si la lista esta vacia 
-                contadorProceso = listaProcesos.size() + 1; //Incrementa uno en el contador, que va a indicar el numero del proceso
-                Proceso proceso = new Proceso(contadorProceso, 0, sizeProceso, tiempoeje); //crea un nuevo proceso
-                panelMemoriaPrincipal.add(proceso.getLabel());//agrega el proceso al panel
-                panelMemoriaPrincipal.repaint();// actualiza el panel
-                System.out.println("TIEMPOEJE" + tiempoeje);
-                listaProcesos.add(proceso); //agrega el proceso a la lista 
-                sizeMemoria = sizeMemoria - sizeProceso; // se le resta espacio a la memoria 
-                labelSizeMemoria.setText(sizeMemoria + "");
-                textArea.setText(listaProcesos.get(0).getLabel().getText() + " creado a las " + labelReloj.getText());
-            } else {
-                posicionInicial = listaProcesos.get(listaProcesos.size() - 1).getPosicionFinal(); // se optiene la posicion del nuevo proceso 
-
-                if (posicionInicial + sizeProceso > 447) {//si el proceso acupa el espacio del sistema operativo
-                    JOptionPane.showMessageDialog(null, "No hay espacio para el nuevo proceso", "Erro", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    contadorProceso = listaProcesos.size() + 1;
-                    posicionInicial = listaProcesos.get(listaProcesos.size() - 1).getPosicionFinal();
-                    Proceso proceso = new Proceso(contadorProceso, posicionInicial, sizeProceso, tiempoeje);
-                    panelMemoriaPrincipal.add(proceso.getLabel());
-                    panelMemoriaPrincipal.repaint();
-
-                    listaProcesos.add(proceso);
-                    sizeMemoria = sizeMemoria - sizeProceso;
-                    labelSizeMemoria.setText(sizeMemoria + "");
-                    textArea.setText(textArea.getText() + "\n" + listaProcesos.get(listaProcesos.size() - 1).getLabel().getText() + " creado a las " + labelReloj.getText());
-                }
-
-            }
+        if (a.isAlive() == false) {
+            a = new HiloAgregar();
+            a.start();
         } else {
-            JOptionPane.showConfirmDialog(null, "ya no hay espacio en memoria", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showConfirmDialog(null, "Se esta agregando un proceso, intente de nuevo", "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-
     }//GEN-LAST:event_btnNuevoPorcesoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -349,11 +323,12 @@ public class main extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(r.isAlive()==false){
-        r = new Hilo();
-        r.start();     
+        if (r.isAlive() == false) {
+            r = new Hilo();
+            r.start();
+        } else {
+            JOptionPane.showConfirmDialog(null, "Ya se está ejecutando", "Error", JOptionPane.ERROR_MESSAGE);
         }
-       
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
@@ -396,6 +371,7 @@ public class main extends javax.swing.JFrame {
         private int cuantum = 10;
         private int contador = 0;
         private int procestoeje = 0;
+
         @Override
         public void run() {
             try {
@@ -405,23 +381,21 @@ public class main extends javax.swing.JFrame {
                     for (int i = 0; i < listaProcesos.size(); i++) {
                         //COPIO EL TIEMPO DE EJECUCION DEL PROCESO EN ESPECIFICO
                         procestoeje = listaProcesos.get(i).getTiempoEjecucion();
-                        System.out.println("entro");
-
+                        listaProcesos.get(i).azul();
+                        repaint();
                         if (listaProcesos.get(i).getTiempoEjecucion() <= cuantum) {
-
                             for (int l = 0; l <= listaProcesos.get(i).getTiempoEjecucion(); l++) {
-
                                 Thread.sleep(1000);
                                 System.out.println("menos a cuantum" + procestoeje);
                             }
                             panelMemoriaPrincipal.remove(listaProcesos.get(i).getLabel());
                             panelMemoriaPrincipal.repaint();
                             //Mostrar en el historial que sale el proceso de la memoria principal
-                            textArea.setText(textArea.getText()+"\n"+listaProcesos.get(i).getLabel().getText()+" sale a las "+labelReloj.getText());
+                            textArea.setText(textArea.getText() + "\n" + listaProcesos.get(i).getLabel().getText() + " sale a las " + labelReloj.getText());
                             //Se le suma a la memoria lo que acupaba el proceso, que seria la altura del label
-                            sizeMemoria = sizeMemoria+listaProcesos.get(i).getAltura();
+                            sizeMemoria = sizeMemoria + listaProcesos.get(i).getAltura();
                             //se modifica el label que muestra el espacio en memoria
-                            labelSizeMemoria.setText(sizeMemoria+"");
+                            labelSizeMemoria.setText(sizeMemoria + "");
                             //se retira el proceso de la lista 
                             listaProcesos.remove(i);
                             System.out.println("remove");
@@ -432,14 +406,60 @@ public class main extends javax.swing.JFrame {
                                 Thread.sleep(1000);
                                 System.out.println("entro ciclo mayor cuantum" + procestoeje + " " + contador);
                             }
-                            System.out.println("mayour cuantum");
-                            listaProcesos.get(i).setTiempoEjecucion(procestoeje - contador);
+                        System.out.println("mayour cuantum");
+                        listaProcesos.get(i).setTiempoEjecucion(procestoeje - contador);
+                        listaProcesos.get(i).verde();
+                        repaint();
                         }
                     }
                 }
-
             } catch (InterruptedException ex) {
+            }
+        }
+    }
+    public class HiloAgregar extends Thread {
 
+        private int cuantum = 10;
+        private int contador = 0;
+        private int procestoeje = 0;
+
+        @Override
+        public void run() {
+            int sizeProceso = (int) Math.floor(Math.random() * 189 + 10);
+            int tiempoeje = (int) Math.floor(Math.random() * 14 + 0);
+            int posicionInicial;
+            if (sizeMemoria != 0) { // si aun hay espacio en memoria
+                if (listaProcesos.size() == 0) { //Si la lista esta vacia 
+                    contadorProceso = listaProcesos.size() + 1; //Incrementa uno en el contador, que va a indicar el numero del proceso
+                    Proceso proceso = new Proceso(contadorProceso, 0, sizeProceso, tiempoeje); //crea un nuevo proceso
+                    panelMemoriaPrincipal.add(proceso.getLabel());//agrega el proceso al panel
+                    panelMemoriaPrincipal.repaint();// actualiza el panel
+                    System.out.println("TIEMPOEJE" + tiempoeje);
+                    listaProcesos.add(proceso); //agrega el proceso a la lista 
+                    sizeMemoria = sizeMemoria - sizeProceso; // se le resta espacio a la memoria 
+                    labelSizeMemoria.setText(sizeMemoria + "");
+                    textArea.setText(listaProcesos.get(0).getLabel().getText() + " creado a las " + labelReloj.getText());
+                } else {
+                    posicionInicial = listaProcesos.get(listaProcesos.size() - 1).getPosicionFinal(); // se optiene la posicion del nuevo proceso 
+
+                    if (posicionInicial + sizeProceso > 447) {//si el proceso acupa el espacio del sistema operativo
+                        JOptionPane.showMessageDialog(null, "No hay espacio para el nuevo proceso", "Erro", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        contadorProceso = listaProcesos.size() + 1;
+                        posicionInicial = listaProcesos.get(listaProcesos.size() - 1).getPosicionFinal();
+                        Proceso proceso = new Proceso(contadorProceso, posicionInicial, sizeProceso, tiempoeje);
+                        panelMemoriaPrincipal.add(proceso.getLabel());
+                        panelMemoriaPrincipal.repaint();
+
+                        listaProcesos.add(proceso);
+                        sizeMemoria = sizeMemoria - sizeProceso;
+                        labelSizeMemoria.setText(sizeMemoria + "");
+                        textArea.setText(textArea.getText() + "\n" + listaProcesos.get(listaProcesos.size() - 1).getLabel().getText() + " creado a las " + labelReloj.getText());
+                    }
+
+                }
+            } else {
+                JOptionPane.showConfirmDialog(null, "ya no hay espacio en memoria", "Error", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
