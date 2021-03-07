@@ -387,6 +387,7 @@ public class main extends javax.swing.JFrame {
                             for (int l = 0; l <= listaProcesos.get(i).getTiempoEjecucion(); l++) {
                                 Thread.sleep(1000);
                                 System.out.println("menos a cuantum" + procestoeje);
+                                labelCalendarizador.setText(listaProcesos.get(i).getLabel().getText());
                             }
                             panelMemoriaPrincipal.remove(listaProcesos.get(i).getLabel());
                             panelMemoriaPrincipal.repaint();
