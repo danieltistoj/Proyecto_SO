@@ -412,6 +412,11 @@ public class main extends javax.swing.JFrame {
                             panelMemoriaPrincipal.repaint();
                             //Mostrar en el historial que sale el proceso de la memoria principal
                             textArea.setText(textArea.getText()+"\n"+listaProcesos.get(i).getLabel().getText()+" sale a las "+labelReloj.getText());
+                            //Se le suma a la memoria lo que acupaba el proceso, que seria la altura del label
+                            sizeMemoria = sizeMemoria+listaProcesos.get(i).getAltura();
+                            //se modifica el label que muestra el espacio en memoria
+                            labelSizeMemoria.setText(sizeMemoria+"");
+                            //se retira el proceso de la lista 
                             listaProcesos.remove(i);
                             System.out.println("remove");
                         } else if (listaProcesos.get(i).getTiempoEjecucion() > cuantum) {
