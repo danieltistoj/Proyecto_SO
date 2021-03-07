@@ -37,7 +37,7 @@ public class main extends javax.swing.JFrame {
         espacioMemoria = panelMemoriaPrincipal.getHeight() - labelSO.getHeight();
         System.out.println(espacioMemoria);
         listaProcesos = new ArrayList<Proceso>();
-        sizeMemoria = 447;
+        sizeMemoria = 427;
     }
 
     /**
