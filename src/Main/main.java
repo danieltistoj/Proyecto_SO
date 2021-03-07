@@ -410,6 +410,8 @@ public class main extends javax.swing.JFrame {
                             }
                             panelMemoriaPrincipal.remove(listaProcesos.get(i).getLabel());
                             panelMemoriaPrincipal.repaint();
+                            //Mostrar en el historial que sale el proceso de la memoria principal
+                            textArea.setText(textArea.getText()+"\n"+listaProcesos.get(i).getLabel().getText()+" sale a las "+labelReloj.getText());
                             listaProcesos.remove(i);
                             System.out.println("remove");
                         } else if (listaProcesos.get(i).getTiempoEjecucion() > cuantum) {
