@@ -21,37 +21,83 @@ public class Proceso {
     private JLabel label;
     private JLabel hexao;
     private JLabel hexaf;
+    private String hexadecimalo;
+    private String hexadecimalf;
+    private int ancho, altura, posicionY, posicionFinal, ContadorPrograma, alturaCP;
     
-    private int ancho, altura, posicionY, posicionFinal;
+    public int getContadorPrograma() {
+        return ContadorPrograma;
+    }
+
+    public void setContadorPrograma(int ContadorPrograma) {
+        this.ContadorPrograma = ContadorPrograma;
+    }
 
     public Proceso(int numProceso, int posicionY, int altura, int time) {
         ancho = 186;
         label = new JLabel("Proceso " + numProceso, SwingConstants.CENTER);
         label.setBounds(0, posicionY, ancho, altura);
         label.setBorder(BorderFactory.createLineBorder(Color.BLACK));
-        label.setFont( new Font("Serif", Font.BOLD, 18));
+        label.setFont( new Font("Serif", Font.BOLD, 14));
         verde();
         this.altura = altura;
         this.posicionY = posicionY;
-        System.out.println(this.posicionY);
+        this.ContadorPrograma = posicionY;
+        this.posicionFinal = altura + posicionY;
+        this.tiempoEjecucion = time;
         
         //HEXA BASE  
-        String hexadecimalo = Integer.toHexString(this.posicionY);
+        hexadecimalo = Integer.toHexString(this.posicionY);
+        hexadecimalo = rellenar(hexadecimalo);
         hexao = new JLabel(hexadecimalo,SwingConstants.LEFT);
-        hexao.setBounds(0, posicionY, 30, 10);
+        hexao.setBounds(0, posicionY, 40, 10);
         hexao.setBackground(Color.black);
         hexao.setFont(new Font("serif",Font.PLAIN,10));
         
         //HEXA LIMITE
-        String hexadecimalf = Integer.toHexString(this.posicionY);
-        hexao = new JLabel(hexadecimalf,SwingConstants.LEFT);
-        hexao.setBounds(0, posicionY, 30, 10);
-        hexao.setBackground(Color.black);
-        hexao.setFont(new Font("serif",Font.PLAIN,10));
-        
-        
-        this.posicionFinal = altura + posicionY;
-        this.tiempoEjecucion = time;
+        hexadecimalf = Integer.toHexString(this.posicionFinal);
+        hexadecimalf = rellenar(hexadecimalf);
+        hexaf = new JLabel(hexadecimalf,SwingConstants.LEFT);
+        hexaf.setBounds(0, posicionFinal, 40, 10);
+        hexaf.setBackground(Color.black);
+        hexaf.setFont(new Font("serif",Font.PLAIN,10));
+        alturaCP = altura/time;
+    }
+
+    public int getAlturaCP() {
+        return alturaCP;
+    }
+
+    public void setAlturaCP(int alturaCP) {
+        this.alturaCP = alturaCP;
+    }
+
+    public String getHexadecimalo() {
+        return hexadecimalo;
+    }
+
+    public void setHexadecimalo(String hexadecimalo) {
+        this.hexadecimalo = hexadecimalo;
+    }
+
+    public String getHexadecimalf() {
+        return hexadecimalf;
+    }
+
+    public void setHexadecimalf(String hexadecimalf) {
+        this.hexadecimalf = hexadecimalf;
+    }
+    
+    public String rellenar(String r)
+    {
+        int tam = 4 - (r.length()-1);
+        String n = "0x";
+        for(int x = 0; x<tam;x++)
+        {
+            n = n + "0";
+        }
+        n = n + r;
+        return n;
     }
     public void azul()
     {
@@ -67,12 +113,23 @@ public class Proceso {
         System.out.println("COLOR VERDE");
         label.setOpaque(true);
     }
-    public JLabel getHexa() {
-        return hexa;
+
+    public JLabel getHexao() {
+        return hexao;
     }
-    public void setHexa(JLabel hexa) {
-        this.hexa = hexa;
+
+    public void setHexao(JLabel hexao) {
+        this.hexao = hexao;
     }
+
+    public JLabel getHexaf() {
+        return hexaf;
+    }
+
+    public void setHexaf(JLabel hexaf) {
+        this.hexaf = hexaf;
+    }
+ 
     public JLabel getLabel() {
         return label;
     }
