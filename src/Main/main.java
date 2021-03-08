@@ -69,7 +69,7 @@ public class main extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
-        panelHXD = new javax.swing.JPanel();
+        panelHex = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -226,14 +226,14 @@ public class main extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout panelHXDLayout = new javax.swing.GroupLayout(panelHXD);
-        panelHXD.setLayout(panelHXDLayout);
-        panelHXDLayout.setHorizontalGroup(
-            panelHXDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 35, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelHexLayout = new javax.swing.GroupLayout(panelHex);
+        panelHex.setLayout(panelHexLayout);
+        panelHexLayout.setHorizontalGroup(
+            panelHexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 47, Short.MAX_VALUE)
         );
-        panelHXDLayout.setVerticalGroup(
-            panelHXDLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelHexLayout.setVerticalGroup(
+            panelHexLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
@@ -247,10 +247,10 @@ public class main extends javax.swing.JFrame {
                         .addGap(26, 26, 26)
                         .addComponent(panelMemoriaPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelHXD, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panelHex, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(19, 19, 19)
+                                .addGap(7, 7, 7)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -304,8 +304,8 @@ public class main extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(panelHXD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelMemoriaPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 476, Short.MAX_VALUE))
+                            .addComponent(panelHex, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelMemoriaPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
 
@@ -410,6 +410,8 @@ public class main extends javax.swing.JFrame {
                             System.out.println("TRABAJANDO " + listaProcesos.get(i).getLabel().getText());
                             panelMemoriaPrincipal.remove(listaProcesos.get(i).getLabel());
                             panelMemoriaPrincipal.repaint();
+                            panelHex.remove(listaProcesos.get(i).getHexa());
+                            panelHex.repaint();
                             //Mostrar en el historial que sale el proceso de la memoria principal
                             textArea.setText(textArea.getText() + "\n" + listaProcesos.get(i).getLabel().getText() + " sale a las " + labelReloj.getText());
                             //Se le suma a la memoria lo que acupaba el proceso, que seria la altura del label
@@ -455,7 +457,9 @@ public class main extends javax.swing.JFrame {
                     contadorProceso = listaProcesos.size() + 1; //Incrementa uno en el contador, que va a indicar el numero del proceso
                     Proceso proceso = new Proceso(contadorProceso, 0, sizeProceso, tiempoeje); //crea un nuevo proceso
                     panelMemoriaPrincipal.add(proceso.getLabel());//agrega el proceso al panel
+                    panelHex.add(proceso.getHexa());
                     panelMemoriaPrincipal.repaint();// actualiza el panel
+                    panelHex.repaint();
                     System.out.println("TIEMPOEJE" + tiempoeje);
                     listaProcesos.add(proceso); //agrega el proceso a la lista 
                     sizeMemoria = sizeMemoria - sizeProceso; // se le resta espacio a la memoria 
@@ -471,8 +475,9 @@ public class main extends javax.swing.JFrame {
                         posicionInicial = listaProcesos.get(listaProcesos.size() - 1).getPosicionFinal();
                         Proceso proceso = new Proceso(contadorProceso, posicionInicial, sizeProceso, tiempoeje);
                         panelMemoriaPrincipal.add(proceso.getLabel());
+                        panelHex.add(proceso.getHexa());
                         panelMemoriaPrincipal.repaint();
-
+                        panelHex.repaint();
                         listaProcesos.add(proceso);
                         sizeMemoria = sizeMemoria - sizeProceso;
                         labelSizeMemoria.setText(sizeMemoria + "");
@@ -505,7 +510,7 @@ public class main extends javax.swing.JFrame {
     private javax.swing.JLabel labelReloj;
     private javax.swing.JLabel labelSO;
     private javax.swing.JLabel labelSizeMemoria;
-    private javax.swing.JPanel panelHXD;
+    private javax.swing.JPanel panelHex;
     private javax.swing.JPanel panelMemoriaPrincipal;
     private javax.swing.JPanel panelProcesador;
     private javax.swing.JTextArea textArea;

@@ -19,6 +19,9 @@ public class Proceso {
 
     private int tiempoEjecucion;
     private JLabel label;
+    private JLabel hexao;
+    private JLabel hexaf;
+    
     private int ancho, altura, posicionY, posicionFinal;
 
     public Proceso(int numProceso, int posicionY, int altura, int time) {
@@ -30,6 +33,23 @@ public class Proceso {
         verde();
         this.altura = altura;
         this.posicionY = posicionY;
+        System.out.println(this.posicionY);
+        
+        //HEXA BASE  
+        String hexadecimalo = Integer.toHexString(this.posicionY);
+        hexao = new JLabel(hexadecimalo,SwingConstants.LEFT);
+        hexao.setBounds(0, posicionY, 30, 10);
+        hexao.setBackground(Color.black);
+        hexao.setFont(new Font("serif",Font.PLAIN,10));
+        
+        //HEXA LIMITE
+        String hexadecimalf = Integer.toHexString(this.posicionY);
+        hexao = new JLabel(hexadecimalf,SwingConstants.LEFT);
+        hexao.setBounds(0, posicionY, 30, 10);
+        hexao.setBackground(Color.black);
+        hexao.setFont(new Font("serif",Font.PLAIN,10));
+        
+        
         this.posicionFinal = altura + posicionY;
         this.tiempoEjecucion = time;
     }
@@ -46,6 +66,12 @@ public class Proceso {
         label.setBackground(Color.GREEN);
         System.out.println("COLOR VERDE");
         label.setOpaque(true);
+    }
+    public JLabel getHexa() {
+        return hexa;
+    }
+    public void setHexa(JLabel hexa) {
+        this.hexa = hexa;
     }
     public JLabel getLabel() {
         return label;
